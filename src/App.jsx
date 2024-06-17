@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/header/Header';
 import Nav from './components/nav/Nav';
 import ArticlesList from './components/articles/ArticlesList';
+import SingleArticle from './components/articles/SingleArticle';
 import TopicsList from './components/topics/TopicsList';
 import { getTopics } from './utils/api';
 import './App.css';
@@ -25,6 +26,7 @@ function App() {
         <Routes>
           <Route path="/" element={<ArticlesList />} />
           <Route path="/topics/:topic" element={<ArticlesList />} />
+          <Route path="/articles/:article_id" element={<SingleArticle/>} />
         </Routes>
       </main>
       </div>

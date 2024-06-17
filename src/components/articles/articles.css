@@ -1,0 +1,16 @@
+.articles-list-section {
+    border: 1px solid black;
+    box-sizing:border-box;
+    padding:1px;
+  }
+
+.article-card {
+    border: 1px solid black;
+    box-sizing:border-box;
+    padding: 10px;
+    margin: 2px;
+}
+
+.article-filters {
+    color: white;
+}

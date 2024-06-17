@@ -2,26 +2,20 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Arial', sans-serif;
+  background-color: gray;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-color: gray; 
+  justify-content: center; 
 }
 
 #root {
   width: 100%;
-  display: flex;
-  justify-content: center;
 }
 
 .App {
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 1200px; 
   width: 100%;
-  padding: 20px;
 }
 
 .NavBar {
@@ -44,16 +38,11 @@ body {
 }
 
 main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   background-color: #f9f9f9;
-  color:black;
+  color: black;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 800px;
   margin: 20px auto;
 }

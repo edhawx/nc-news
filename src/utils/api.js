@@ -27,4 +27,16 @@ export const getLinks = ()=>{
     })
 }
 
+export const getCommentsByArticleId = (article_id)=>{
+    return newsApi.get(`/articles/${article_id}/comments`)
+    .then((res)=> res.data)
+    .catch((err)=>{
+        if(err.response && err.response.status === 404){
+            return {comments: [] };
+        } else {
+            throw err;
+        }
+    })
+};
+
 

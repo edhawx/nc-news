@@ -7,6 +7,7 @@ import SingleArticle from './components/articles/SingleArticle';
 import TopicsList from './components/topics/TopicsList';
 import { getTopics } from './utils/api';
 import './App.css';
+import { Container } from '@mui/material';
 
 function App() {
   const [topics, setTopics] = useState([]);
@@ -19,17 +20,39 @@ function App() {
 
   return (
     <Router>
-      <div className="App">
-      <Header />
-      <Nav />
-      <main>
-        <Routes>
-          <Route path="/" element={<ArticlesList />} />
-          <Route path="/topics/:topic" element={<ArticlesList />} />
-          <Route path="/articles/:article_id" element={<SingleArticle/>} />
-        </Routes>
-      </main>
-      </div>
+      <Container
+        sx={{
+          padding: '20px',
+          '@media (max-width: 600px)': {
+            maxWidth: '100%',
+            padding: '10px',
+          },
+          '@media (min-width: 600px)': {
+            maxWidth: '540px',
+          },
+          '@media (min-width: 960px)': {
+            maxWidth: '720px',
+          },
+          '@media (min-width: 1280px)': {
+            maxWidth: '960px',
+          },
+          '@media (min-width: 1920px)': {
+            maxWidth: '1140px',
+          },
+        }}
+      >
+        <div className="App">
+          <Header />
+          <Nav />
+          <main>
+            <Routes>
+              <Route path="/" element={<ArticlesList />} />
+              <Route path="/topics/:topic" element={<ArticlesList />} />
+              <Route path="/articles/:article_id" element={<SingleArticle />} />
+            </Routes>
+          </main>
+        </div>
+      </Container>
     </Router>
   );
 }

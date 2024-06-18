@@ -1,25 +1,39 @@
 .articles-list-section {
     border: 1px solid black;
-    box-sizing:border-box;
-    padding:1px;
+    box-sizing: border-box;
+    padding: 1px;
   }
-
-.article-card {
+  
+  .article-card {
     border: 1px solid black;
-    box-sizing:border-box;
+    box-sizing: border-box;
     padding: 10px;
     margin: 2px;
-}
-
-.article-filters {
+  }
+  
+  .article-filters {
     color: white;
-}
-
-.vote-group {
+  }
+  
+  .vote-group {
     display: flex;
     justify-content: left;
-}
-
-.vote-p-tag {
+  }
+  
+  .vote-p-tag {
     padding-right: 10px;
-}
+  }
+  
+  .article-author {
+    font-style: italic;
+    font-size: 0.8rem;
+  }
+
+  .article-date {
+    font-style: italic;
+    font-size: 0.8rem;
+  }
+
+  .article-card-link {
+    font-size: 0.9rem;
+  }

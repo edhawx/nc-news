@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { postComment } from "../../utils/api";
 import { Box, TextField, Button, Collapse, Typography } from "@mui/material";
 import './comments.css';
+import { useUser } from '../../contexts/UserContext';
 
 const CommentForm = ({ articleId, addComment }) => {
   const [username, setUsername] = useState('');
@@ -9,15 +10,16 @@ const CommentForm = ({ articleId, addComment }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
   const [open, setOpen] = useState(false);
-  const [submissionStatus, setSubmissionStatus] = useState('idle'); 
+  const [submissionStatus, setSubmissionStatus] = useState('idle');
+  const { loggedInUser } = useUser();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     setError('');
-    setSubmissionStatus('idle'); 
+    setSubmissionStatus('idle');
 
-    postComment(articleId, { username, body })
+    postComment(articleId, { username: loggedInUser || username, body })
       .then((comment) => {
         addComment(comment);
         setUsername('');
@@ -57,14 +59,21 @@ const CommentForm = ({ articleId, addComment }) => {
           onSubmit={handleSubmit}
           className="comment-form"
         >
-          <TextField
-            required
-            id="username"
-            label="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            fullWidth
-          />
+          {loggedInUser ? (
+            <Typography variant="body2" sx={{ m: 1 }}>
+              Commenting as {loggedInUser}
+            </Typography>
+          ) : (
+            <TextField
+              required
+              id="username"
+              label="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              fullWidth
+              style={{ marginBottom: '1px', marginLeft: '-10px' }} 
+            />
+          )}
           <TextField
             required
             id="comment"
@@ -74,6 +83,7 @@ const CommentForm = ({ articleId, addComment }) => {
             value={body}
             onChange={(e) => setBody(e.target.value)}
             fullWidth
+            style={{ marginBottom: '1px', marginLeft: '0px' }} 
           />
           <Button
             type="submit"

@@ -1,26 +1,38 @@
-.comment-container {
-    border-top: 1px solid black;
-    margin-top: 50px;
-}
-
 .comments-title {
     display: flex;
     justify-content: center;
-
-}
-
-.comments-section {
+    border-top: 1px solid black;
+    margin-top: 50px;
+    margin-bottom: 20px;
+  }
+  
+  .comment-form {
+    margin: 20px;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  .comments-section {
     margin: 10px;
     padding: 10px;
     border: 1px solid black;
-}
-
-.comment-author {
+    border-radius: 8px;
+    background-color: #fff;
+  }
+  
+  .comment-author {
     font-style: italic;
     font-size: 0.8rem;
-}
-
-.comment-date {
+  }
+  
+  .comment-date {
     font-style: italic;
-    font-size:0.7rem;
-}
+    font-size: 0.7rem;
+  }
+  
+  .error {
+    color: red;
+    margin-top: 10px;
+  }

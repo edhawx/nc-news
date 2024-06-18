@@ -1,7 +1,9 @@
 import React from "react";
 import './comments.css';
+import { useState } from "react";
 
 const CommentCard = ({ comment }) => {
+  
   return (
     <section className="comments-section" key={comment.comment_id}>
       <p className="comment-body">{comment.body}</p>

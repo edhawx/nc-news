@@ -1,17 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './articles.css';
+import ArticleVote from './ArticleVote';
 
 const ArticleCard = ({ article }) => {
   return (
-    <div className="article-card">
+    <article className="article-card">
       <h2>{article.title}</h2>
-      <p>{article.body}</p>
+      <p>{article.body.slice(0, 200)}...</p>
       <p>Author: {article.author}</p>
       <p>Published: {new Date(article.created_at).toLocaleDateString()}</p>
-      <p>Comments: {article.comment_count}</p>
+      <ArticleVote articleId={article.article_id} initialVotes={article.votes} />
       <Link to={`/articles/${article.article_id}`}>Read more</Link>
-    </div>
+    </article>
   );
 };
 

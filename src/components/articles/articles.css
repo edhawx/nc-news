@@ -14,3 +14,12 @@
 .article-filters {
     color: white;
 }
+
+.vote-group {
+    display: flex;
+    justify-content: left;
+}
+
+.vote-p-tag {
+    padding-right: 10px;
+}

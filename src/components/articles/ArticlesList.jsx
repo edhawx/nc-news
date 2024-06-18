@@ -4,7 +4,7 @@ import { getArticles } from '../../utils/api';
 import ArticleCard from './ArticleCard';
 import ArticleFilters from './ArticleFilters';
 import Pagination from '@mui/material/Pagination';
-import { Typography } from '@mui/material';
+import { Typography, CircularProgress, Box } from '@mui/material';
 
 const ArticlesList = () => {
   const { topic } = useParams();
@@ -12,23 +12,43 @@ const ArticlesList = () => {
   const [filters, setFilters] = useState({ sortBy: 'created_at', topic: topic || '' });
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     setFilters(prevFilters => ({ ...prevFilters, topic: topic || '' }));
   }, [topic]);
 
   useEffect(() => {
+    setLoading(true);
     getArticles(filters.sortBy, filters.topic, page)
       .then(data => {
         setArticles(data.articles);
         setTotalPages(Math.ceil(data.total_count / 10)); 
+        setLoading(false);
       })
-      .catch(error => console.error('Error fetching articles: ', error));
+      .catch(error => {
+        console.error('Error fetching articles: ', error);
+        setError('Error fetching articles');
+        setLoading(false);
+      });
   }, [filters, page]);
 
   const handleChange = (event, value) => {
     setPage(value);
   };
+
+  if (loading) {
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <CircularProgress />
+      </Box>
+    );
+  }
+
+  if (error) {
+    return <p>{error}</p>;
+  }
 
   return (
     <section>

@@ -48,6 +48,15 @@ export const postComment = (article_id, comment) => {
       });
   };
 
+export const deleteComment = (comment_id) =>{
+    return newsApi.delete(`/comments/${comment_id}`)
+    .then((res) => res.data)
+    .catch((err)=>{
+        console.error('API error: ', err);
+        throw err;
+    });
+};
+
 export const voteOnArticle = (article_id, increment) => {
     return newsApi.patch(`/articles/${article_id}`, { inc_votes: increment }).then((res) => res.data);
   };

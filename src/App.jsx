@@ -8,6 +8,7 @@ import TopicsList from './components/topics/TopicsList';
 import { getTopics } from './utils/api';
 import './App.css';
 import { Container } from '@mui/material';
+import { UserProvider } from './contexts/UserContext.jsx';
 
 function App() {
   const [topics, setTopics] = useState([]);
@@ -19,6 +20,7 @@ function App() {
   }, []);
 
   return (
+    <UserProvider>
     <Router>
       <Container
         sx={{
@@ -54,6 +56,7 @@ function App() {
         </div>
       </Container>
     </Router>
+    </UserProvider>
   );
 }
 

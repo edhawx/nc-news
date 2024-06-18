@@ -9,14 +9,12 @@ import { Typography } from '@mui/material';
 const ArticlesList = () => {
   const { topic } = useParams();
   const [articles, setArticles] = useState([]);
-  const[loading, setLoading] = useState(true);
   const [filters, setFilters] = useState({ sortBy: 'created_at', topic: topic || '' });
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
-    setFilters((prevFilters) => ({ ...prevFilters, topic: topic || '' }));
+    setFilters(prevFilters => ({ ...prevFilters, topic: topic || '' }));
   }, [topic]);
 
   useEffect(() => {
@@ -24,16 +22,9 @@ const ArticlesList = () => {
       .then(data => {
         setArticles(data.articles);
         setTotalPages(Math.ceil(data.total_count / 10)); 
-        setLoading(false);
       })
-      .catch(err=>{
-        setError('Error fetching articles', err);
-        setLoading(false);
-      });
+      .catch(error => console.error('Error fetching articles: ', error));
   }, [filters, page]);
-
-  if(loading) return <p>Loading articles...</p>
-  if(error) return <p>{error}</p>
 
   const handleChange = (event, value) => {
     setPage(value);

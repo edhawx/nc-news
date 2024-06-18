@@ -39,4 +39,16 @@ export const getCommentsByArticleId = (article_id)=>{
     })
 };
 
+export const postComment = (article_id, comment) => {
+    return newsApi.post(`/articles/${article_id}/comments`, comment)
+      .then((res) => res.data.comment)
+      .catch((err) => {
+        console.error('API error:', err);
+        throw err;
+      });
+  };
+
+export const voteOnArticle = (article_id, increment) => {
+    return newsApi.patch(`/articles/${article_id}`, { inc_votes: increment }).then((res) => res.data);
+  };
 

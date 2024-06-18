@@ -34,6 +34,11 @@
     font-size: 0.8rem;
   }
 
+  .article-comment-count {
+    font-style: italic;
+    font-size: 0.8rem;
+  }
+
   .article-card-link {
     font-size: 0.9rem;
   }

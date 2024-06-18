@@ -10,10 +10,9 @@ export const getTopics = ()=>{
     })
 }
 
-export const getArticles = (sortBy = 'created_at', topic = '', page = 1) => {
-    const params = { sort_by: sortBy, p: page, limit: 10 }; 
+export const getArticles = (sortBy = 'created_at', topic = '', page = 1, order = 'ASC') => {
+    const params = { sort_by: sortBy, p: page, limit: 10, order: order.toUpperCase() }; 
     if (topic) params.topic = topic;
-    if(sortBy === 'title' || sortBy === 'author') params.order = 'ASC';
     return newsApi.get('/articles', { params }).then((res) => res.data);
   };
 

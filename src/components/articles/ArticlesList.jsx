@@ -16,7 +16,7 @@ const ArticlesList = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    setFilters(prevFilters => ({ ...prevFilters, topic: topic || '' }));
+    setFilters(prevFilters => ({ ...prevFilters, topic: topic?.toLowerCase() || '' }));
   }, [topic]);
 
   useEffect(() => {
@@ -24,7 +24,7 @@ const ArticlesList = () => {
     getArticles(filters.sortBy, filters.topic, page)
       .then(data => {
         setArticles(data.articles);
-        setTotalPages(Math.ceil(data.total_count / 10)); 
+        setTotalPages(Math.ceil(data.total_count / 10));
         setLoading(false);
       })
       .catch(error => {
@@ -38,17 +38,13 @@ const ArticlesList = () => {
     setPage(value);
   };
 
-  if (loading) {
-    return (
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-        <CircularProgress />
-      </Box>
-    );
-  }
+  if (loading) return (
+    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+      <CircularProgress />
+    </Box>
+  );
 
-  if (error) {
-    return <p>{error}</p>;
-  }
+  if (error) return <p>{error}</p>;
 
   return (
     <section>

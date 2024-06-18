@@ -38,7 +38,7 @@ const ArticleVote = ({ articleId, initialVotes }) => {
           style={{
             backgroundColor: voteStatus === 'success' ? 'green' : 'black',
             color: 'white',
-            padding: '1px 8px',
+            padding: '0px 0px',
             fontSize: '0.75rem'
           }}
         >
@@ -52,7 +52,7 @@ const ArticleVote = ({ articleId, initialVotes }) => {
           style={{
             backgroundColor: voteStatus === 'success' ? 'green' : 'black',
             color: 'white',
-            padding: '4px 8px',
+            padding: '0px 0px',
             fontSize: '0.75rem'
           }}
         >

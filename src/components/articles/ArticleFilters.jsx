@@ -10,9 +10,15 @@ const ArticleFilters = ({ setFilters }) => {
     setFilters((prevFilters) => ({ ...prevFilters, sortBy: e.target.value }));
   };
 
+  const handleTopicKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      setFilters((prevFilters) => ({ ...prevFilters, topic }));
+    }
+  };
+
   const handleTopicChange = (e) => {
     setTopic(e.target.value);
-    setFilters((prevFilters) => ({ ...prevFilters, topic: e.target.value }));
   };
 
   return (
@@ -37,9 +43,10 @@ const ArticleFilters = ({ setFilters }) => {
       <FormControl fullWidth margin="normal">
         <TextField
           id="topic"
-          label="Topic"
+          label="Search for a Topic"
           value={topic}
           onChange={handleTopicChange}
+          onKeyPress={handleTopicKeyPress}
         />
       </FormControl>
     </div>

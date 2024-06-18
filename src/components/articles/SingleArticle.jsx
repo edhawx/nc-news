@@ -27,6 +27,7 @@ const SingleArticle = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
 
+  
   return (
     <div>
       <h1>{article.title}</h1>

@@ -10,6 +10,7 @@ const ArticleCard = ({ article }) => {
       <p>{article.body.slice(0, 200)}...</p>
       <p className="article-author">Author: {article.author}</p>
       <p className="article-date">Published: {new Date(article.created_at).toLocaleDateString()}</p>
+      <p className="article-comment-count">Comments: {article.comment_count}</p>
       <ArticleVote articleId={article.article_id} initialVotes={article.votes} />
       <Link to={`/articles/${article.article_id}`} className="article-card-link">Read more</Link>
     </article>

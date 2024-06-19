@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { postComment } from "../../utils/api";
-import { Box, TextField, Button, Collapse, Typography } from "@mui/material";
-import './comments.css';
+import { Box, TextField, Button, Collapse, Typography, CircularProgress } from "@mui/material";
 import { useUser } from '../../contexts/UserContext';
+import ErrorComponent from '../error/ErrorComponent';
+import './comments.css';
 
 const CommentForm = ({ articleId, addComment }) => {
   const [username, setUsername] = useState('');
@@ -19,6 +20,13 @@ const CommentForm = ({ articleId, addComment }) => {
     setError('');
     setSubmissionStatus('idle');
 
+    if (!body.trim()) {
+      setError("You haven't typed a comment");
+      setIsSubmitting(false);
+      setSubmissionStatus('error');
+      return;
+    }
+
     postComment(articleId, { username: loggedInUser || username, body })
       .then((comment) => {
         addComment(comment);
@@ -30,8 +38,8 @@ const CommentForm = ({ articleId, addComment }) => {
         setTimeout(() => setSubmissionStatus('idle'), 2000);
       })
       .catch((err) => {
-        console.error(`Error whilst posting comment: `, err);
-        const errorMessage = err.response?.data?.msg || 'An error occurred whilst posting comment';
+        console.error('Error whilst posting comment:', err);
+        const errorMessage = err.response?.data?.msg || 'An error occurred whilst posting the comment';
         setError(errorMessage);
         setIsSubmitting(false);
         setSubmissionStatus('error');
@@ -71,7 +79,7 @@ const CommentForm = ({ articleId, addComment }) => {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               fullWidth
-              style={{ marginBottom: '1px', marginLeft: '-10px' }} 
+              sx={{ marginBottom: '16px', marginLeft: '-10px' }} 
             />
           )}
           <TextField
@@ -83,7 +91,7 @@ const CommentForm = ({ articleId, addComment }) => {
             value={body}
             onChange={(e) => setBody(e.target.value)}
             fullWidth
-            style={{ marginBottom: '1px', marginLeft: '0px' }} 
+            sx={{ marginBottom: '16px', marginLeft: '-10px' }} 
           />
           <Button
             type="submit"
@@ -92,9 +100,9 @@ const CommentForm = ({ articleId, addComment }) => {
             disabled={isSubmitting}
             sx={{ mt: 2 }}
           >
-            {submissionStatus === 'success' ? 'Success!' : (isSubmitting ? 'Posting comment...' : 'Post Comment')}
+            {submissionStatus === 'success' ? 'Success!' : (isSubmitting ? <CircularProgress size={24} style={{ color: 'white' }} /> : 'Post Comment')}
           </Button>
-          {error && <p className="error">{error}</p>}
+          {error && <ErrorComponent message={error} />}
         </Box>
       </Collapse>
     </Box>

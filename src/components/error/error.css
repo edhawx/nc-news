@@ -1,0 +1,16 @@
+.error-container, .not-found-container {
+    text-align: center;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid red;
+    border-radius: 8px;
+    background-color: #ffe6e6;
+  }
+  
+  .error-container h2, .not-found-container h2 {
+    color: red;
+  }
+  
+  .error-container p, .not-found-container p {
+    color: #333;
+  }

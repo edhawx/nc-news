@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate, useParams } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/header/Header';
 import Nav from './components/nav/Nav';
 import ArticlesList from './components/articles/ArticlesList';
 import SingleArticle from './components/articles/SingleArticle';
+import TopicsList from './components/topics/TopicsList';
 import { getTopics } from './utils/api';
 import './App.css';
 import { Container } from '@mui/material';
 import { UserProvider } from './contexts/UserContext.jsx';
+import NotFound from './components/error/NotFound';
 
 function App() {
   const [topics, setTopics] = useState([]);
@@ -48,9 +50,9 @@ function App() {
             <main>
               <Routes>
                 <Route path="/" element={<ArticlesList />} />
-                <Route path="/topics/:topic" element={<TopicWrapper />} />
+                <Route path="/topics/:topic" element={<ArticlesList />} />
                 <Route path="/articles/:article_id" element={<SingleArticle />} />
-                <Route path="*" element={<Navigate to="/" />} />
+                <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
           </div>
@@ -59,15 +61,5 @@ function App() {
     </UserProvider>
   );
 }
-
-const TopicWrapper = () => {
-  const { topic } = useParams();
-  const normalizedTopic = topic.toLowerCase();
-  if (topic !== normalizedTopic) {
-    return <Navigate to={`/topics/${normalizedTopic}`} />;
-  }
-
-  return <ArticlesList />;
-};
 
 export default App;

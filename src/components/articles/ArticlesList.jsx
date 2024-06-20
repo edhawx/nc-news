@@ -1,26 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { getArticles, getTopics } from '../../utils/api';
 import ArticleCard from './ArticleCard';
 import ArticleFilters from './ArticleFilters';
 import Pagination from '@mui/material/Pagination';
 import { Typography, CircularProgress, Box } from '@mui/material';
 import ErrorComponent from '../error/ErrorComponent';
+import './articles.css';
 
 const ArticlesList = () => {
   const { topic } = useParams();
-  const navigate = useNavigate();
-  const location = useLocation();
   const [articles, setArticles] = useState([]);
-  const [filters, setFilters] = useState({ sortBy: 'created_at', topic: topic || '', order: 'DESC' });
+  const [filters, setFilters] = useState({ sort_by: 'created_at', topic: topic || '', order: 'DESC' });
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
+  const clearError = ()=>{
     setError(null);
+  };
+
+  useEffect(() => {
     setLoading(true);
+    clearError();
     getTopics()
       .then((topicsData) => {
         const topics = topicsData.topics.map(t => t.slug);
@@ -29,7 +32,7 @@ const ArticlesList = () => {
           setLoading(false);
           return Promise.reject('Topic not found');
         } else {
-          return getArticles(filters.sortBy, filters.topic, page, filters.order);
+          return getArticles(filters.sort_by, topic || '', page, filters.order);
         }
       })
       .then((articlesData) => {
@@ -45,11 +48,6 @@ const ArticlesList = () => {
         setLoading(false);
       });
   }, [filters, page, topic]);
-
-  useEffect(() => {
-    setFilters({ sortBy: 'created_at', topic: topic || '', order: 'DESC' });
-    setPage(1); 
-  }, [location]);
 
   const handleChange = (event, value) => {
     setPage(value);
@@ -70,7 +68,9 @@ const ArticlesList = () => {
         <ArticleCard key={article.article_id} article={article} />
       ))}
       <Typography>Page: {page}</Typography>
+      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
       <Pagination count={totalPages} page={page} onChange={handleChange} />
+      </Box>
     </section>
   );
 };

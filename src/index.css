@@ -1,68 +1,121 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  --background-default-light: #ffffff;
+  --background-paper-light: #f9f9f9;
+  --text-primary-light: #000000;
+  --border-color-light: #000000;
+  --button-background-light: #ffffff;
+  --button-text-light: #ffffff;
+  --toggle-theme-button-bg: #ffffff;
+  --toggle-theme-button-color: #000000;
+  --toggle-theme-button-border: #000000;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  --background-default-dark: #303030;
+  --background-paper-dark: #424242;
+  --text-primary-dark: #ffffff;
+  --border-color-dark: #ffffff;
+  --button-background-dark: #424242;
+  --button-text-dark: #ffffff;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+  --hover-color-light: #555;
+  --hover-color-dark: #bbb;
 }
 
 body {
   margin: 0;
+  padding: 0;
+  font-family: 'roboto', sans-serif;
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  justify-content: center;
+  background-color: var(--background-default-light);
+  color: var(--text-primary-light);
+
+  --toggle-theme-button-bg: #000000;
+  --toggle-theme-button-color: #ffffff;
+  --toggle-theme-button-border: #ffffff;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+body.light-mode {
+  --text-primary: var(--text-primary-light);
+  --hover-color: var(--hover-color-light);
+}
+
+body.dark-mode {
+  background-color: var(--background-default-dark);
+  color: var(--text-primary-dark);
+  --text-primary: var(--text-primary-dark);
+  --hover-color: var(--hover-color-dark);
+}
+
+#root {
+  width: 100%;
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--button-background-light);
+  color: var(--button-text-light);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+body.dark-mode button {
+  background-color: var(--button-background-dark);
+  color: var(--button-text-dark);
+}
+
+.article-card-link {
+  color: var(--link-color);
+  background-color: var(--link-background);
+  padding: 5px 10px;
+  border: 1px solid var(--link-color);
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.article-card-link:hover {
+  color: var(--link-hover-color);
+  background-color: var(--link-text-color);
+}
+
+.toggle-theme-button {
+  background-color: var(--toggle-theme-button-bg);
+  color: var(--toggle-theme-button-color);
+  border: 1px solid var(--toggle-theme-button-border);
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.comment-toggle {
+  color: var(--text-primary);
+  cursor: pointer;
+  margin-bottom: 10px;
+  transition: color 0.3s ease;
+}
+
+.comment-toggle:hover {
+  color: var(--hover-color);
+}
+
+body.dark-mode .comment-field-form .MuiOutlinedInput-root {
+  border-color: transparent;
+}
+
+body.dark-mode .comment-field-form .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: lightblue;
+}
+
+body.dark-mode .comment-field-form .MuiInputLabel-root {
+  color: grey; 
+}
+
+body.dark-mode .comment-field-form .MuiInputLabel-root.Mui-focused {
+  color: lightskyblue;
+}
+
+body.dark-mode .comment-field-form .MuiInputBase-input {
+  color: white;
 }

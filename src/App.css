@@ -1,48 +1,66 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Roboto', sans-serif;
-  background-color: gray;
-  display: flex;
-  justify-content: center; 
-}
-
-#root {
-  width: 100%;
-}
-
 .App {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
+  min-height: 100vh;
+  background-color: var(--background-default-light);
+  color: var(--text-primary-light);
 }
 
-.NavBar {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.nav-link {
-  text-decoration: none;
-  color: black;
-  padding: 5px 10px;
-  border: 1px solid black;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-}
-
-.nav-link:hover {
-  background-color: lightgray;
+body.dark-mode .App {
+  background-color: var(--background-default-dark);
+  color: var(--text-primary-dark);
 }
 
 main {
-  background-color: #f9f9f9;
-  color: black;
+  background-color: var(--background-paper-light);
+  color: var(--text-primary-light);
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 100%;
+  max-width: 1140px;
   margin: 20px auto;
+}
+
+body.dark-mode main {
+  background-color: var(--background-paper-dark);
+  color: var(--text-primary-dark);
+}
+
+@media (max-width: 480px) {
+  main {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  main {
+    padding: 15px;
+  }
+}
+
+@media (min-width: 600px) {
+  main {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 960px) {
+  main {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 1280px) {
+  main {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1920px) {
+  main {
+    max-width: 1140px;
+  }
 }

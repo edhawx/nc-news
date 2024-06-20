@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FormControl, InputLabel, Select, MenuItem, TextField } from '@mui/material';
 import { useSearchParams, useNavigate } from 'react-router-dom';
+import './articles.css'
 
 const ArticleFilters = ({ setFilters }) => {
   const [searchParams] = useSearchParams();
@@ -21,20 +22,21 @@ const ArticleFilters = ({ setFilters }) => {
     const newOrder = newSortBy === 'title' || newSortBy === 'author' ? 'ASC' : 'DESC';
     setSortBy(newSortBy);
     setOrder(newOrder);
-    setFilters({ sort_by: newSortBy, order: newOrder });
+    setFilters((prevFilters) => ({ ...prevFilters, sort_by: newSortBy, order: newOrder }));
     navigate(`?sort_by=${newSortBy}&order=${newOrder}`);
   };
 
   const handleOrderChange = (e) => {
-    setOrder(e.target.value);
-    setFilters({ order: e.target.value });
-    navigate(`?sort_by=${sortBy}&order=${e.target.value}`);
+    const newOrder = e.target.value;
+    setOrder(newOrder);
+    setFilters((prevFilters) => ({ ...prevFilters, order: newOrder }));
+    navigate(`?sort_by=${sortBy}&order=${newOrder}`);
   };
 
   const handleTopicKeyPress = (e) => {
     if (e.key === 'Enter') {
       e.preventDefault();
-      setFilters({ topic });
+      setFilters((prevFilters) => ({ ...prevFilters, topic }));
       navigate(`/topics/${topic}`);
     }
   };
@@ -44,24 +46,59 @@ const ArticleFilters = ({ setFilters }) => {
   };
 
   return (
-    <div className="article-filters">
-      <FormControl fullWidth margin="normal" sx={{maxWidth:'400px', mr:'10px'}}>
+    <div>
+      <FormControl fullWidth margin="normal" sx={{ maxWidth: '400px', mr: '10px' }}>
         <TextField
           id="topic"
           label="Search for a Topic"
           value={topic}
           onChange={handleTopicChange}
-          onKeyPress={handleTopicKeyPress}
+          onKeyUp={handleTopicKeyPress}
+          sx={{
+            '& .MuiInputBase-root': {
+              color: 'var(--text-primary)',
+              backgroundColor: 'var(--background-paper)',
+            },
+            '& .MuiInputLabel-root': {
+              color: 'var(--text-primary)',
+            },
+            '& .MuiOutlinedInput-root': {
+              '& fieldset': {
+                borderColor: 'var(--border-color)',
+              },
+              '&:hover fieldset': {
+                borderColor: 'var(--border-color-hover)',
+              },
+              '&.Mui-focused fieldset': {
+                borderColor: 'var(--border-color-active)',
+              },
+            },
+          }}
         />
       </FormControl>
-      <FormControl fullWidth margin="normal" sx={{maxWidth: '300px'}}>
-        <InputLabel id="sort-by-label">Sort By</InputLabel>
+      <FormControl fullWidth margin="normal" sx={{ maxWidth: '300px' }}>
+        <InputLabel id="sort-by-label" sx={{ color: 'var(--text-primary)' }}>Sort By</InputLabel>
         <Select
           labelId="sort-by-label"
           id="sort-by"
           value={sortBy}
           label="Sort By"
           onChange={handleSortChange}
+          sx={{
+            '& .MuiSelect-select': {
+              color: 'var(--text-primary)',
+              backgroundColor: 'var(--background-paper)',
+            },
+            '& .MuiOutlinedInput-notchedOutline': {
+              borderColor: 'var(--border-color)',
+            },
+            '&:hover .MuiOutlinedInput-notchedOutline': {
+              borderColor: 'var(--border-color-hover)',
+            },
+            '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+              borderColor: 'var(--border-color-active)',
+            },
+          }}
         >
           <MenuItem value="created_at">Date</MenuItem>
           <MenuItem value="votes">Votes</MenuItem>
@@ -71,14 +108,29 @@ const ArticleFilters = ({ setFilters }) => {
           <MenuItem value="author">Author</MenuItem>
         </Select>
       </FormControl>
-      <FormControl fullWidth margin="normal" sx={{maxWidth: '100px', ml: '10px'}}>
-        <InputLabel id="order-label">Order</InputLabel>
+      <FormControl fullWidth margin="normal" sx={{ maxWidth: '100px', ml: '10px' }}>
+        <InputLabel id="order-label" sx={{ color: 'var(--text-primary)' }}>Order</InputLabel>
         <Select
           labelId="order-label"
           id="order"
           value={order}
           label="Order"
           onChange={handleOrderChange}
+          sx={{
+            '& .MuiSelect-select': {
+              color: 'var(--text-primary)',
+              backgroundColor: 'var(--background-paper)',
+            },
+            '& .MuiOutlinedInput-notchedOutline': {
+              borderColor: 'var(--border-color)',
+            },
+            '&:hover .MuiOutlinedInput-notchedOutline': {
+              borderColor: 'var(--border-color-hover)',
+            },
+            '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+              borderColor: 'var(--border-color-active)',
+            },
+          }}
         >
           <MenuItem value="ASC">Ascending</MenuItem>
           <MenuItem value="DESC">Descending</MenuItem>

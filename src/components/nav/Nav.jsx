@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { getLinks } from '../../utils/api';
 import { Link } from 'react-router-dom';
+import './nav.css';
 
 const Nav = () => {
   const [topics, setTopics] = useState([]);
+  const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
     getLinks()
@@ -17,6 +19,11 @@ const Nav = () => {
     return slug.charAt(0).toUpperCase() + slug.slice(1).toLowerCase();
   };
 
+  const toggleTheme = () => {
+    setDarkMode(prevMode => !prevMode);
+    document.body.classList.toggle('dark-mode');
+  };
+
   return (
     <nav className="NavBar">
       <Link to="/" className="nav-link">Home</Link>
@@ -25,6 +32,9 @@ const Nav = () => {
           {formatTopicName(topic.slug)}
         </Link>
       ))}
+      <button onClick={toggleTheme} className="toggle-theme-button">
+        {darkMode ? 'Light Mode' : 'Dark Mode'}
+      </button>
     </nav>
   );
 };

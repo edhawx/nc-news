@@ -50,6 +50,7 @@ const CommentForm = ({ articleId, addComment }) => {
     <Box>
       <Typography
         variant="body1"
+        className="comment-toggle"
         color="primary"
         onClick={() => setOpen(!open)}
         style={{ cursor: 'pointer', marginBottom: '10px' }}
@@ -60,7 +61,8 @@ const CommentForm = ({ articleId, addComment }) => {
         <Box
           component="form"
           sx={{
-            '& .MuiTextField-root': { m: 1 },
+            '& .MuiTextField-root': { mb: 0, ml: '10px', mr: '10px' },
+            '& .MuiButton-root': { mt: 0 }, 
           }}
           noValidate
           autoComplete="off"
@@ -82,23 +84,28 @@ const CommentForm = ({ articleId, addComment }) => {
               sx={{ marginBottom: '16px', marginLeft: '-10px' }} 
             />
           )}
+          
+          <Box sx={{ mt: '-10px', marginBottom: '16px', marginLeft: '-10px', marginRight: '10px' }}>
           <TextField
             required
             id="comment"
             label="Comment"
+            className="comment-field-form"
             multiline
             rows={4}
             value={body}
             onChange={(e) => setBody(e.target.value)}
             fullWidth
-            sx={{ marginBottom: '16px', marginLeft: '-10px' }} 
+            
           />
+          </Box>
+
           <Button
             type="submit"
             variant="contained"
             color={submissionStatus === 'success' ? 'success' : 'primary'}
             disabled={isSubmitting}
-            sx={{ mt: 2 }}
+            sx={{ mt: 2 , width: '150px'}}
           >
             {submissionStatus === 'success' ? 'Success!' : (isSubmitting ? <CircularProgress size={24} style={{ color: 'white' }} /> : 'Post Comment')}
           </Button>

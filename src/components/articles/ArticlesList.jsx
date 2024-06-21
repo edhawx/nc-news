@@ -6,6 +6,7 @@ import ArticleFilters from './ArticleFilters';
 import Pagination from '@mui/material/Pagination';
 import { Typography, CircularProgress, Box } from '@mui/material';
 import ErrorComponent from '../error/ErrorComponent';
+
 import './articles.css';
 
 const ArticlesList = () => {

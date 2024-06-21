@@ -61,6 +61,9 @@ const ArticleFilters = ({ setFilters }) => {
             },
             '& .MuiInputLabel-root': {
               color: 'var(--text-primary)',
+              '&.Mui-focused': {
+                color: 'var(--label-color-focused)',
+              },
             },
             '& .MuiOutlinedInput-root': {
               '& fieldset': {

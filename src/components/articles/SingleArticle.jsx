@@ -34,12 +34,15 @@ const SingleArticle = () => {
   if (error) return <ErrorComponent message={error} />;
 
   return (
-    <div>
-      <h1>{article.title}</h1>
-      <p>{article.body}</p>
-      <p className="article-author">Author: {article.author}</p>
-      <p className="article-date">Published: {new Date(article.created_at).toLocaleDateString()}</p>
-      <ArticleVote articleId={article.article_id} initialVotes={article.votes} />
+    <div className="single-article">
+      <h1 className="single-article-title">{article.title}</h1>
+      <img src={article.article_img_url} alt={article.title} className="single-article-image" />
+      <p className="single-article-body">{article.body}</p>
+      <div className="single-article-details">
+        <p className="article-author">Author: {article.author}</p>
+        <p className="article-date">Published: {new Date(article.created_at).toLocaleDateString()}</p>
+        <ArticleVote articleId={article.article_id} initialVotes={article.votes} />
+      </div>
       <CommentList articleId={article.article_id} />
     </div>
   );

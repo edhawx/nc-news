@@ -8,6 +8,9 @@
   --toggle-theme-button-bg: #ffffff;
   --toggle-theme-button-color: #000000;
   --toggle-theme-button-border: #000000;
+  --border-color-hover-light: #555555;
+  --border-color-active-light: #000000;
+  --label-color-focused-light: #000000;
 
   --background-default-dark: #303030;
   --background-paper-dark: #424242;
@@ -15,6 +18,9 @@
   --border-color-dark: #ffffff;
   --button-background-dark: #424242;
   --button-text-dark: #ffffff;
+  --border-color-hover-dark: #bbbbbb;
+  --border-color-active-dark: #ffffff;
+  --label-color-focused-dark: #ffffff;
 
   --hover-color-light: #555;
   --hover-color-dark: #bbb;
@@ -36,7 +42,11 @@ body {
 
 body.light-mode {
   --text-primary: var(--text-primary-light);
-  --hover-color: var(--hover-color-light);
+  --background-paper: var(--background-paper-light);
+  --border-color: var(--border-color-light);
+  --border-color-hover: var(--border-color-hover-light);
+  --border-color-active: var(--border-color-active-light);
+  --label-color-focused: var(--label-color-focused-light);
 }
 
 body.dark-mode {
@@ -44,6 +54,12 @@ body.dark-mode {
   color: var(--text-primary-dark);
   --text-primary: var(--text-primary-dark);
   --hover-color: var(--hover-color-dark);
+  --text-primary: var(--text-primary-dark);
+  --background-paper: var(--background-paper-dark);
+  --border-color: var(--border-color-dark);
+  --border-color-hover: var(--border-color-hover-dark);
+  --border-color-active: var(--border-color-active-dark);
+  --label-color-focused: var(--label-color-focused-dark);
 }
 
 #root {

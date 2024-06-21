@@ -26,30 +26,31 @@ function App() {
       <ThemeContextProvider>
         <Router>
           <Container
-            sx={{
-              padding: '20px',
-              '@media (max-width: 480px)': {
-                maxWidth: '90%',
-                padding: '8px',
-              },
-              '@media (max-width: 600px)': {
-                maxWidth: '100%',
-                padding: '10px',
-              },
-              '@media (min-width: 600px)': {
-                maxWidth: '540px',
-              },
-              '@media (min-width: 960px)': {
-                maxWidth: '720px',
-              },
-              '@media (min-width: 1280px)': {
-                maxWidth: '960px',
-              },
-              '@media (min-width: 1920px)': {
-                maxWidth: '1140px',
-              },
-            }}
-          >
+  sx={{
+    padding: '20px',
+    '@media (max-width: 480px)': {
+      maxWidth: '90%',
+      padding: '8px',
+    },
+    '@media (max-width: 600px)': {
+      maxWidth: '100%',
+      padding: '10px',
+    },
+    '@media (min-width: 601px) and (max-width: 960px)': {
+      maxWidth: '90%', 
+      padding: '15px',
+    },
+    '@media (min-width: 960px)': {
+      maxWidth: '720px',
+    },
+    '@media (min-width: 1280px)': {
+      maxWidth: '960px',
+    },
+    '@media (min-width: 1920px)': {
+      maxWidth: '1140px',
+    },
+  }}
+>
             <CssBaseline />
             <div className="App">
               <Header />
